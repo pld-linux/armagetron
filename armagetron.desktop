@@ -6,4 +6,5 @@ Exec=armagetron
 Terminal=0
 Icon=armagetron.png
 Type=Application
+Encoding=UTF-8
 # vi: encoding=utf-8
