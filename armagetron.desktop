@@ -7,4 +7,5 @@ Terminal=false
 Icon=armagetron.png
 Type=Application
 Encoding=UTF-8
+Categories=Application;Game;ArcadeGame;
 # vi: encoding=utf-8
