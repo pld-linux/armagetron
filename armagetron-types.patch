@@ -56,3 +56,14 @@
  		  );
  }
  
+--- armagetron-0.2.6.0/src/tron/gAIBase.cpp.orig	2003-07-20 10:13:10.000000000 +0000
++++ armagetron-0.2.6.0/src/tron/gAIBase.cpp	2003-12-01 10:08:34.000000000 +0000
+@@ -113,7 +113,7 @@
+ 		gAIPlayer  *ai  = dynamic_cast<gAIPlayer*>(p);
+ 		if (ai && ai->Character() )
+ 		{
+-			int index = ((int)ai->Character() - (int)&gAICharacter::s_Characters(0))/sizeof(gAICharacter);
++			int index = ((size_t)ai->Character() - (size_t)&gAICharacter::s_Characters(0))/sizeof(gAICharacter);
+ 			inGame(index) = true;
+ 		}
+ 	}
