@@ -61,19 +61,19 @@ Moviepack addon.
 Dodatek Moviepack.
 
 %package common
-Summary:	Common files for armagetron
-Summary(pl):	Pliki wspólne dla armagetron
+Summary:	Common files for Armagetron
+Summary(pl):	Pliki wspólne dla Armagetrona
 Group:		Applications/Games
 
 %description common
-Common files for armagetron server and player game.
+Common files for Armagetron server and player game.
 
 %description common -l pl
-Pliki wspólne armagetron-a dla serwera i trybu gracza.
+Pliki wspólne Armagetrona dla serwera i trybu gracza.
 
 %package server
-Summary:	Armagetron server.
-Summary(pl):	Armagetron serwer
+Summary:	Armagetron server
+Summary(pl):	Serwer Armagetrona
 Group:		Applications/Games
 Requires:	%{name}-common = %{version}-%{release}
 
@@ -81,7 +81,7 @@ Requires:	%{name}-common = %{version}-%{release}
 Armagetron server.
 
 %description server -l pl 
-Armagetron serwer.
+Serwer Armagetrona.
 
 %prep
 %setup -q -a3
@@ -94,7 +94,8 @@ cp -f /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
 
-%configure   --disable-glout
+%configure \
+	--disable-glout
 %{__make} bindist
 mv bindist bindist-dedicated
 
