@@ -1,0 +1,11 @@
+--- armagerton/configure.in.orig	Sun Jul  6 14:49:59 2003
++++ armagerton/configure.in	Sun Jul  6 20:48:54 2003
+@@ -410,7 +410,7 @@
+ AC_OUTPUT(src/Makefile src/engine/Makefile 
+ src/tools/Makefile src/render/Makefile
+ src/ui/Makefile src/network/Makefile  
+-src/engine/Makefile src/tron/Makefile
++src/tron/Makefile
+ Makefile Makefile.global
+ batch/install batch/uninstall batch/starter
+ batch/serverstarter batch/masterstarter

@@ -1,12 +1,12 @@
-Summary:	-
-Summary(pl):	-
+Summary:	A Tron lightcycle game with focus on multiplayer mode
 Name:		armagetron
 Version:	0.2.3
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-# Source0-md5:	a1a2a7c6ab93c60d31965dd9ff1e24c5
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
+# Source0-md5:	37bfb0ecba69b39a2a070bf5f5f8a40d
+Patch0:		%{name}-ac_fix.patch
 URL:		http://armagetron.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
@@ -16,34 +16,50 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_sysconfdir	/etc/%{name}
 
 %description
-
-%description -l pl
+In Armagetron, you ride a lightcycle around the game grid. You can
+only make sharp turns of 90 degrees and a wall constantly builds up
+after you. Make your enemies crash into your wall, but be aware that
+they are trying to do the same to you. If you are fast enough, you may
+be able to trap them, but the only way to speed up your lightcycle is
+to drive close to the dangerous walls. Prepare for exciting strategic
+preparations followed by action-packed close combat!
 
 %prep
 %setup -q
+#%patch0 -p1
 
 %build
 #rm -f missing
-#{__gettextize}
 #{__aclocal}
 #{__autoconf}
-#{__autoheader}
-#{__automake}
+
 %configure
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc CHANGELOG doc/*
+%doc CHANGELOG doc/*.html doc/net
 %attr(755,root,root) %{_bindir}/*
 %dir %{_sysconfdir}
-%{_sysconfdir}/*
-%{_prefix}/games/%{name}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.cfg
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.srv
+%dir %{_prefix}/games/%{name}
+%{_prefix}/games/%{name}/arenas
+%dir %{_prefix}/games/%{name}/bin
+%attr(755,root,root) %{_prefix}/games/%{name}/bin/[ap]*
+%dir %{_prefix}/games/%{name}/language
+%{_prefix}/games/%{name}/language/languages.txt
+%{_prefix}/games/%{name}/language/english.txt
+%lang(de) %{_prefix}/games/%{name}/language/deutsch.txt
+%{_prefix}/games/%{name}/models
+%{_prefix}/games/%{name}/sound
+%{_prefix}/games/%{name}/textures
