@@ -47,7 +47,6 @@ Group:		X11/Applications/Games
 Requires:	%{name} = %{version}
                                                                                 
 %description moviepack
-Summary:  Moviepack addon
 Moviepack addon.
                                                                                 
 %description moviepack -l pl
