@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=armagetron
+Comment=Tron lightcycle game
+Comment[pl]=Gra Tron ze światłocyklem 
+Exec=armagetron
+Terminal=0
+Icon=armagetron.png
+Type=Application
+# vi: encoding=utf-8
