@@ -2,7 +2,7 @@ Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.6.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
@@ -11,6 +11,7 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	http://armagetron.sourceforge.net/addons/moviepack.zip
 # Source3-md5:	e2d40309dde7e1339ca6aff7599cdfa3
+Patch0:		%{name}-types.patch
 URL:		http://armagetron.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
@@ -19,6 +20,9 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+# it installs data in %{_prefix}/games, so...
+%define		_bindir		/usr/bin
+%define		_prefix		/usr/lib
 %define		_sysconfdir	/etc/%{name}
 
 %description
@@ -53,10 +57,10 @@ Moviepack addon.
 Dodatek Moviepack.
 
 %prep
-%setup -q -a 3
+%setup -q -a3
+%patch0 -p1
 
 %build
-rm -f missing
 %{__aclocal}
 %{__autoconf}
 %configure
@@ -64,10 +68,12 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Games,%{_pixmapsdir}} \
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Games,%{_pixmapsdir},%{_bindir}} \
 	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack
 
 %{__make} install
+
+mv -f $RPM_BUILD_ROOT%{_prefix}/bin/* $RPM_BUILD_ROOT%{_bindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
