@@ -1,4 +1,5 @@
 Summary:	A Tron lightcycle game with focus on multiplayer mode
+Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.5
 Release:	0.1
@@ -23,6 +24,16 @@ they are trying to do the same to you. If you are fast enough, you may
 be able to trap them, but the only way to speed up your lightcycle is
 to drive close to the dangerous walls. Prepare for exciting strategic
 preparations followed by action-packed close combat!
+
+%description -l pl
+W grze Armagetron jedzie siê ¶wiat³ocyklem dooko³a planszy. Mo¿na
+wykonywaæ tylko ostre zakrêty o 90 stopni, a za graczem ci±gle buduje
+siê ¶ciana. Trzeba spowodowaæ, by wrogowie roztrzaskali siê na tej
+¶cianie, ale tak¿e uwa¿aæ, bo oni próbuj± zrobiæ to samo. Je¶li gracz
+jest szybki, mo¿e z³apaæ ich wszystkich, ale jedynym sposobem na
+przyspieszenie ¶wiat³ocyklu jest jazda blisko niebezpiecznych ¶cian.
+Trzeba siê przygotowaæ na ekscytuj±ce strategiczne przygotowania i
+nastêpuj±c± po nich walkê w zbli¿eniu!
 
 %prep
 %setup -q
