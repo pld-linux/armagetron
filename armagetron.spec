@@ -2,11 +2,17 @@ Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.5.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 # Source0-md5:	71bfeaa5ddaf38d5fd8d893caec91d15
+Source1:	%{name}.desktop
+Source2:	%{name}.png
+Source3:	http://armagetron.sourceforge.net/addons/moviepack.zip
+# Source3-md5:	e2d40309dde7e1339ca6aff7599cdfa3
+Source4:	http://armagetron.sourceforge.net/addons/moviesounds_fq.zip
+# Source4-md5:	3c5d04af52eb296cdeb2fba5ecbd8899
 URL:		http://armagetron.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
@@ -34,8 +40,33 @@ przyspieszenie ¶wiat³ocyklu jest jazda blisko niebezpiecznych ¶cian.
 Trzeba siê przygotowaæ na ekscytuj±ce strategiczne przygotowania i
 nastêpuj±c± po nich walkê w zbli¿eniu!
 
+%package moviepack
+Summary:	Moviepack addon
+Summary(pl):	Dodatek Moviepack
+Group:		X11/Applications/Games
+Requires:	%{name} = %{version}
+                                                                                
+%description moviepack
+Summary:  Moviepack addon
+Moviepack addon.
+                                                                                
+%description moviepack -l pl
+Dodatek Moviepack.
+
+%package moviesounds
+Summary:	Moviesounds addon
+Summary(pl):	Dodatek Moviesounds
+Group:		X11/Applications/Games
+Requires:	%{name} = %{version}
+                                                                                
+%description moviesounds
+Moviesounds addon.
+                                                                                
+%description moviesounds -l pl
+Dodatek Moviesounds.
+
 %prep
-%setup -q
+%setup -q -a 3 -a 4
 
 %build
 rm -f missing
@@ -46,8 +77,16 @@ rm -f missing
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Games,%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/movie{pack,sounds}
 
 %{__make} install
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games
+install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+
+cp -R moviepack moviesounds $RPM_BUILD_ROOT%{_prefix}/games/%{name}
+rm -f $RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack/art_read_me.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -70,3 +109,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/games/%{name}/models
 %{_prefix}/games/%{name}/sound
 %{_prefix}/games/%{name}/textures
+%{_applnkdir}/Games/*
+%{_pixmapsdir}/*
+
+%files moviepack
+%defattr(644,root,root,755)
+%doc moviepack/art_read_me.txt
+%{_prefix}/games/%{name}/moviepack
+
+%files moviesounds
+%defattr(644,root,root,755)
+%{_prefix}/games/%{name}/moviesounds
