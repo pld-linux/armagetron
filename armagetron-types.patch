@@ -1,0 +1,58 @@
+--- armagetron-0.2.6.0/src/engine/eWall.cpp.orig	2003-10-13 20:43:15.000000000 +0000
++++ armagetron-0.2.6.0/src/engine/eWall.cpp	2003-12-01 09:11:27.000000000 +0000
+@@ -280,6 +280,6 @@
+ #else
+   static eWall* pwall = NULL;
+   static eWall& wall = *pwall; 
+-  return reinterpret_cast<eWall *> (reinterpret_cast<int>(&this[-viewer]) - reinterpret_cast<int>(&wall.view[0]) + reinterpret_cast<int>(&wall));
++  return reinterpret_cast<eWall *> (reinterpret_cast<size_t>(&this[-viewer]) - reinterpret_cast<size_t>(&wall.view[0]) + reinterpret_cast<size_t>(&wall));
+ #endif
+ }
+--- armagetron-0.2.6.0/src/network/net_udp.cpp.orig	2003-10-13 20:43:15.000000000 +0000
++++ armagetron-0.2.6.0/src/network/net_udp.cpp	2003-12-01 09:16:56.000000000 +0000
+@@ -104,8 +104,12 @@
+ #ifdef MACOSX
+ typedef int NET_SIZE;
+ #else
++#ifdef __linux__
++typedef socklen_t NET_SIZE;
++#else
+ typedef size_t NET_SIZE;
+ #endif
++#endif
+ #include <unistd.h>
+ #endif
+ 
+--- armagetron-0.2.6.0/src/network/nNetwork.cpp.orig	2003-10-14 07:38:56.000000000 +0000
++++ armagetron-0.2.6.0/src/network/nNetwork.cpp	2003-12-01 09:14:07.000000000 +0000
+@@ -1618,7 +1618,7 @@
+ 
+ 				//	 if (peer!=id)
+ 				//  con << "Changed incoming address.\n";
+-				int lenleft = reinterpret_cast<int>(bend) - reinterpret_cast<int>(b);
++				int lenleft = reinterpret_cast<size_t>(bend) - reinterpret_cast<size_t>(b);
+ 
+ #ifndef NOEXCEPT
+ 				try
+@@ -1629,7 +1629,7 @@
+ 					pmess = tNEW( nMessage )(b,id,lenleft);
+ 					nMessage& mess = *pmess;
+ 
+-					lenleft = reinterpret_cast<int>(bend) - reinterpret_cast<int>(b);
++					lenleft = reinterpret_cast<size_t>(bend) - reinterpret_cast<size_t>(b);
+ 
+ 					bool mess_is_new=true;
+ 					// see if we have got this packet before
+--- armagetron-0.2.6.0/src/network/nServerInfo.cpp.orig	2003-10-13 20:43:15.000000000 +0000
++++ armagetron-0.2.6.0/src/network/nServerInfo.cpp	2003-12-01 09:12:48.000000000 +0000
+@@ -403,8 +403,8 @@
+ 	static nServerInfo& info = *this; // will not cause recursion since it is called only once.
+ 	// uaaa. Pointer magic...
+ 	return reinterpret_cast<nServerInfo *>
+-		( reinterpret_cast<int> (anchor) -
+-		  reinterpret_cast<int> (&info.next) + reinterpret_cast<int>( &info )
++		( reinterpret_cast<size_t> (anchor) -
++		  reinterpret_cast<size_t> (&info.next) + reinterpret_cast<size_t>( &info )
+ 		  );
+ }
+ 
