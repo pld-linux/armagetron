@@ -1,8 +1,3 @@
-#
-# Conditionale build:
-# _with_moviesounds - build moviesounds subpackage. Note: it probably is a
-#                     violation of Disney's copyright.
-#
 Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
@@ -16,14 +11,12 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	http://armagetron.sourceforge.net/addons/moviepack.zip
 # Source3-md5:	e2d40309dde7e1339ca6aff7599cdfa3
-%if %{?_with_moviesounds:1}%{!?_with_moviesounds:0}
-Source4:	http://armagetron.sourceforge.net/addons/moviesounds_fq.zip
-# Source4-md5:	3c5d04af52eb296cdeb2fba5ecbd8899
-%endif
 URL:		http://armagetron.sourceforge.net/
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_mixer-devel
+BuildRequires:	autoconf
+Buildrequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/%{name}
@@ -59,20 +52,8 @@ Moviepack addon.
 %description moviepack -l pl
 Dodatek Moviepack.
 
-%package moviesounds
-Summary:	Moviesounds addon
-Summary(pl):	Dodatek Moviesounds
-Group:		X11/Applications/Games
-Requires:	%{name} = %{version}
-                                                                                
-%description moviesounds
-Moviesounds addon.
-                                                                                
-%description moviesounds -l pl
-Dodatek Moviesounds.
-
 %prep
-%setup -q -a 3 %{?_with_moviesounds:-a 4}
+%setup -q -a 3
 
 %build
 rm -f missing
@@ -84,7 +65,7 @@ rm -f missing
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_applnkdir}/Games,%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/movie{pack,sounds}
+	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack
 
 %{__make} install
 
@@ -92,7 +73,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 cp -R moviepack $RPM_BUILD_ROOT%{_prefix}/games/%{name}
-%{?_with_moviesounds:cp -R moviesounds $RPM_BUILD_ROOT%{_prefix}/games/%{name}}
 rm -f $RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack/art_read_me.txt
 
 %clean
@@ -123,9 +103,3 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc moviepack/art_read_me.txt
 %{_prefix}/games/%{name}/moviepack
-
-%if %{?_with_moviesounds:1}%{!?_with_moviesounds:0}
-%files moviesounds
-%defattr(644,root,root,755)
-%{_prefix}/games/%{name}/moviesounds
-%endif
