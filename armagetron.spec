@@ -2,7 +2,7 @@ Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.6.0
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
@@ -68,14 +68,14 @@ Dodatek Moviepack.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Games,%{_pixmapsdir},%{_bindir}} \
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir}} \
 	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack
 
 %{__make} install
 
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/* $RPM_BUILD_ROOT%{_bindir}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Games
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 cp -R moviepack $RPM_BUILD_ROOT%{_prefix}/games/%{name}
@@ -102,7 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/games/%{name}/models
 %{_prefix}/games/%{name}/sound
 %{_prefix}/games/%{name}/textures
-%{_applnkdir}/Games/*
+%{_desktopdir}/*
 %{_pixmapsdir}/*
 
 %files moviepack
