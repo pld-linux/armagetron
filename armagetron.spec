@@ -45,10 +45,10 @@ Summary:	Moviepack addon
 Summary(pl):	Dodatek Moviepack
 Group:		X11/Applications/Games
 Requires:	%{name} = %{version}
-                                                                                
+
 %description moviepack
 Moviepack addon.
-                                                                                
+
 %description moviepack -l pl
 Dodatek Moviepack.
 
