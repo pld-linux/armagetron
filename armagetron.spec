@@ -1,12 +1,12 @@
 Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
-Version:	0.2.5
+Version:	0.2.5.1
 Release:	0.1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
-# Source0-md5:	f84e45f87f4acf73e1caa7a37ada154c
+# Source0-md5:	99c1a776691362108911bbd67e4a27c8
 Patch0:		%{name}-ac_fix.patch
 URL:		http://armagetron.sourceforge.net/
 BuildRequires:	OpenGL-devel
