@@ -62,6 +62,7 @@ Dodatek Moviepack.
 %patch0 -p1
 
 %build
+cp -f /usr/share/automake/config.sub admin
 %{__aclocal}
 %{__autoconf}
 %configure
