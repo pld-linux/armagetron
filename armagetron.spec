@@ -1,8 +1,10 @@
+#
+# TODO: start scripts for server
 Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.6.0
-Release:	4
+Release:	4.1
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
@@ -13,6 +15,7 @@ Source3:	http://armagetron.sourceforge.net/addons/moviepack.zip
 # Source3-md5:	e2d40309dde7e1339ca6aff7599cdfa3
 Patch0:		%{name}-types.patch
 URL:		http://armagetron.sourceforge.net/
+Requires:	%{name}-common = %{version}-%{release}
 BuildRequires:	OpenGL-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	SDL_mixer-devel
@@ -57,6 +60,29 @@ Moviepack addon.
 %description moviepack -l pl
 Dodatek Moviepack.
 
+%package common
+Summary:	Common files for armagetron
+Summary(pl):	Pliki wspólne dla armagetron
+Group:		Applications/Games
+
+%description common
+Common files for armagetron server and player game.
+
+%description common -l pl
+Pliki wspólne armagetron-a dla serwera i trybu gracza.
+
+%package server
+Summary:	Armagetron server.
+Summary(pl):	Armagetron serwer
+Group:		Applications/Games
+Requires:	%{name}-common = %{version}-%{release}
+
+%description server
+Armagetron server.
+
+%description server -l pl 
+Armagetron serwer.
+
 %prep
 %setup -q -a3
 %patch0 -p1
@@ -67,6 +93,11 @@ Dodatek Moviepack.
 cp -f /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
+
+%configure   --disable-glout
+%{__make} bindist
+mv bindist bindist-dedicated
+
 %configure
 %{__make}
 
@@ -76,6 +107,10 @@ install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_bindir}} \
 	$RPM_BUILD_ROOT%{_prefix}/games/%{name}/moviepack
 
 %{__make} install
+
+cd bindist-dedicated
+./install
+cd ..
 
 mv -f $RPM_BUILD_ROOT%{_prefix}/bin/* $RPM_BUILD_ROOT%{_bindir}
 
@@ -91,10 +126,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGELOG doc/*.html doc/net
-%attr(755,root,root) %{_bindir}/*
-%dir %{_sysconfdir}
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.cfg
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.srv
+%attr(755,root,root) %{_bindir}/%{name}
+%attr(755,root,root) %{_bindir}/%{name}-stat
 %dir %{_prefix}/games/%{name}
 %{_prefix}/games/%{name}/arenas
 %dir %{_prefix}/games/%{name}/bin
@@ -113,3 +146,19 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc moviepack/art_read_me.txt
 %{_prefix}/games/%{name}/moviepack
+
+%files server 
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/armagetron-dedicated
+%dir %{_prefix}/games/armagetron-dedicated
+%{_prefix}/games/armagetron-dedicated/bin
+%attr(755,root,root) %{_prefix}/games/armagetron-dedicated/bin/*
+%exclude %{_prefix}/games/armagetron-dedicated/bin/uninstall
+%{_prefix}/games/armagetron-dedicated/language
+#%%dir %{_prefix}/games/armagetron-dedicated/rc.d
+#%%attr(755,root,root) %{_prefix}/games/armagetron-dedicated/rc.d/*
+
+%files common
+%dir %{_sysconfdir}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.cfg
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/*.srv
