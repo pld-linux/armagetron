@@ -2,7 +2,7 @@ Summary:	A Tron lightcycle game with focus on multiplayer mode
 Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.6.0
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications/Games
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
@@ -23,7 +23,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # it installs data in %{_prefix}/games, so...
 %define		_bindir		/usr/bin
-%define		_prefix		/usr/lib
+%define		_prefix		/usr/%{_lib}
 %define		_sysconfdir	/etc/%{name}
 
 %description
@@ -49,7 +49,7 @@ nastêpuj±c± po nich walkê w zbli¿eniu!
 Summary:	Moviepack addon
 Summary(pl):	Dodatek Moviepack
 Group:		X11/Applications/Games
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description moviepack
 Moviepack addon.
@@ -61,8 +61,10 @@ Dodatek Moviepack.
 %setup -q -a3
 %patch0 -p1
 
+%{__perl} -pi -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@X11R6/%{_lib}@' configure.in
+
 %build
-cp -f /usr/share/automake/config.sub admin
+cp -f /usr/share/automake/config.sub .
 %{__aclocal}
 %{__autoconf}
 %configure
