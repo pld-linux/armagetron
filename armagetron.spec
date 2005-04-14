@@ -76,7 +76,7 @@ Serwer Armagetrona.
 %setup -q -a3
 %patch0 -p1
 
-%{__perl} -pi -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@X11R6/%{_lib}@' configure.in
+sed -i -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@X11R6/%{_lib}@' configure.in
 
 %build
 cp -f /usr/share/automake/config.sub .
