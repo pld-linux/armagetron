@@ -69,7 +69,7 @@ Group:		Applications/Games
 %description server
 Armagetron server.
 
-%description server -l pl 
+%description server -l pl
 Serwer Armagetrona.
 
 %prep
