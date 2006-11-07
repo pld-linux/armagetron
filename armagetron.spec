@@ -136,7 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/games/%{name}/models
 %{_prefix}/games/%{name}/sound
 %{_prefix}/games/%{name}/textures
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 
 %files moviepack
