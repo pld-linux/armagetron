@@ -1,7 +1,7 @@
 #
 # TODO: start scripts for server
 Summary:	A Tron lightcycle game with focus on multiplayer mode
-Summary(pl.UTF-8):   Gra Tron ze światłocyklem skupiająca się na trybie dla wielu graczy
+Summary(pl.UTF-8):	Gra Tron ze światłocyklem skupiająca się na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.6.1
 Release:	1
@@ -51,7 +51,7 @@ następującą po nich walkę w zbliżeniu!
 
 %package moviepack
 Summary:	Moviepack addon
-Summary(pl.UTF-8):   Dodatek Moviepack
+Summary(pl.UTF-8):	Dodatek Moviepack
 Group:		X11/Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
@@ -63,7 +63,7 @@ Dodatek Moviepack.
 
 %package server
 Summary:	Armagetron server
-Summary(pl.UTF-8):   Serwer Armagetrona
+Summary(pl.UTF-8):	Serwer Armagetrona
 Group:		Applications/Games
 
 %description server
