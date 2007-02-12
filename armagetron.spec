@@ -1,7 +1,7 @@
 #
 # TODO: start scripts for server
 Summary:	A Tron lightcycle game with focus on multiplayer mode
-Summary(pl):	Gra Tron ze ¶wiat³ocyklem skupiaj±ca siê na trybie dla wielu graczy
+Summary(pl.UTF-8):   Gra Tron ze Å›wiatÅ‚ocyklem skupiajÄ…ca siÄ™ na trybie dla wielu graczy
 Name:		armagetron
 Version:	0.2.6.1
 Release:	1
@@ -39,37 +39,37 @@ be able to trap them, but the only way to speed up your lightcycle is
 to drive close to the dangerous walls. Prepare for exciting strategic
 preparations followed by action-packed close combat!
 
-%description -l pl
-W grze Armagetron jedzie siê ¶wiat³ocyklem dooko³a planszy. Mo¿na
-wykonywaæ tylko ostre zakrêty o 90 stopni, a za graczem ci±gle buduje
-siê ¶ciana. Trzeba spowodowaæ, by wrogowie roztrzaskali siê na tej
-¶cianie, ale tak¿e uwa¿aæ, bo oni próbuj± zrobiæ to samo. Je¶li gracz
-jest szybki, mo¿e z³apaæ ich wszystkich, ale jedynym sposobem na
-przyspieszenie ¶wiat³ocyklu jest jazda blisko niebezpiecznych ¶cian.
-Trzeba siê przygotowaæ na ekscytuj±ce strategiczne przygotowania i
-nastêpuj±c± po nich walkê w zbli¿eniu!
+%description -l pl.UTF-8
+W grze Armagetron jedzie siÄ™ Å›wiatÅ‚ocyklem dookoÅ‚a planszy. MoÅ¼na
+wykonywaÄ‡ tylko ostre zakrÄ™ty o 90 stopni, a za graczem ciÄ…gle buduje
+siÄ™ Å›ciana. Trzeba spowodowaÄ‡, by wrogowie roztrzaskali siÄ™ na tej
+Å›cianie, ale takÅ¼e uwaÅ¼aÄ‡, bo oni prÃ³bujÄ… zrobiÄ‡ to samo. JeÅ›li gracz
+jest szybki, moÅ¼e zÅ‚apaÄ‡ ich wszystkich, ale jedynym sposobem na
+przyspieszenie Å›wiatÅ‚ocyklu jest jazda blisko niebezpiecznych Å›cian.
+Trzeba siÄ™ przygotowaÄ‡ na ekscytujÄ…ce strategiczne przygotowania i
+nastÄ™pujÄ…cÄ… po nich walkÄ™ w zbliÅ¼eniu!
 
 %package moviepack
 Summary:	Moviepack addon
-Summary(pl):	Dodatek Moviepack
+Summary(pl.UTF-8):   Dodatek Moviepack
 Group:		X11/Applications/Games
 Requires:	%{name} = %{version}-%{release}
 
 %description moviepack
 Moviepack addon.
 
-%description moviepack -l pl
+%description moviepack -l pl.UTF-8
 Dodatek Moviepack.
 
 %package server
 Summary:	Armagetron server
-Summary(pl):	Serwer Armagetrona
+Summary(pl.UTF-8):   Serwer Armagetrona
 Group:		Applications/Games
 
 %description server
 Armagetron server.
 
-%description server -l pl
+%description server -l pl.UTF-8
 Serwer Armagetrona.
 
 %prep
