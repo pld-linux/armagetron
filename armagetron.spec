@@ -74,7 +74,7 @@ Serwer Armagetrona.
 
 %prep
 %setup -q -a3
-%patch0 -p1
+%patch -P0 -p1
 
 sed -i -e 's@/usr/lib@/usr/%{_lib}@;s@X11R6/lib@X11R6/%{_lib}@' configure.in
 
